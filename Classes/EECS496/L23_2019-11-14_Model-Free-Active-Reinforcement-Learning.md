@@ -1,0 +1,35 @@
+# L23 (November 14th, 2019) - Model Free Active Reinforcement Learning
+
+- remember temporal difference learning
+	- change to follow greedy policy w/ exploration
+	- not exactly model free (therefore kinda doesn't work)
+	- GET_EQU_SLIDE_5
+		- need T&R to calculate the value function
+- problem
+	- state values are not enough to find good actions
+	- instead, need to estimate the *action-value* function, Q
+	- GET_EQU_SLIDE_6
+- Q-Learning
+	- define the *action-value function* <code>Q<sup>&pi;</sup>(s,a)</code>
+	- GET_MAT_SLIDE_7
+	- GET_EQU_SLIDE_8
+- bellman optimality criterion
+	- GET_EQU_SLIDE_9
+- Q-Learning
+	- Start w/ arbitrary Q function Q<sub>0</sub>
+	- Follow greedy policy w/ exploration
+	- F/ each observed (s, a, s')
+		- GET_EQU_SLIDE_10
+	- until <code>ABS[Q<sub>i+1</sub>(s,a)-Q<sub>i</sub>(s,a)]</code> is small enough
+- on-policy vs off-policy
+	- for on policy, take actual Q val for Gamma max q sa, off policy is what is described above (max value possible)
+	- on policy aka actual action taken rather than max
+- SARSA
+	- on policy equivalent of Q learning
+	- GET_EQU_SLIDE_12
+- Algorithm Comparison
+	- GET_MAT_SLIDE_14
+- given an RL Problem, which should we use?
+	- model-free are more flexible and storage efficient, but slower
+	- in some RL problems, a reasonable model can be quickly acquired; here model-based methods work well
+	- no diff in asympotic rate of convergence between the two w/ respect to # of samples from environment (in the worst case)
