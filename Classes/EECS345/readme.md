@@ -17,7 +17,7 @@ Date | Lecture | Subject | Notes
  01/31 | L08 | Denotational Semantics | [link](L08.md)
  02/05 | L10 | Abstraction | [link](L10.md)
  02/10 | L12 | Scope | [link](L12.md)
- 02/26 | L19 | _ | [link](L19.md)
+ 02/26 | L19 | Interpreter pt. 2 | [link](L19.md)
  02/28 | L20 | _ | [link](L20.md)
  03/02 | L21 | _ | [link](L21.md)
  03/04 | L22 | _ | [link](L22.md)
