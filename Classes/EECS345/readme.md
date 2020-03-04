@@ -20,7 +20,7 @@ Date | Lecture | Subject | Notes
  02/26 | L19 | Interpreter pt. 2 | [link](L19.md)
  02/28 | L20 | Functions | [link](L20.md)
  03/02 | L21 | Denotational Semantics f/ Functions/Subprograms | [link](L21.md)
- 03/04 | L22 | _ | [link](L22.md)
+ 03/04 | L22 | M<sub>value</sub> and M<sub>state</sub> Definitions and Boxes | [link](L22.md)
  03/06 | L23 | _ | [link](L23.md)
  03/16 | L24 | _ | [link](L24.md)
  03/18 | L25 | _ | [link](L25.md)
