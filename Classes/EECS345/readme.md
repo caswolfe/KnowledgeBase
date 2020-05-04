@@ -3,7 +3,7 @@
 ## Table of Contents
 
 [Test #1 prep](TP01.md)  
-[Test #2 prep](TP01.md)  
+[Test #2 prep](TP02.md)  
 
 Date | Lecture | Subject | Notes
 :--: | :-: | :------ | :---:
