@@ -19,3 +19,4 @@ Simple Neuron Abstraction | [link](#Simple-Neuron-Abstraction)
 ### Simple Neuron Abstraction
 - Squashing linear function <code>g(in)</code>
     - <code>a<sub>i</sub> ← </code>
+    - 
