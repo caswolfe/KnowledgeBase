@@ -6,6 +6,7 @@ Item | Link
 Introduction | [Link](#Introduction)
 Review of Prob and Stats | [link](#Review-of-Probability-and-Statists)
 Machine Learning Intro | [link](#Machine-Learning-Intro)
+Decision Tree Classifiers | [link](#Decision-Tree-Classifiers)
 
 ### Terms and Definitions
 Term | Definition
@@ -166,3 +167,69 @@ P | Performance Measure
     - hierarchical
 - feature space
     - can think of examples embedded in an *n* dimensional vector space
+
+### Decision Tree Classifiers
+- Mitchel's Ch 3
+- 1980's
+- very popular
+- Tree
+    - directed acyclic graph
+    - internal nodes
+        - attribute tests
+    - leaf nodes
+        - classifier labels
+- decision tree induction
+    - at each step, algorithm will choose an attribute to test
+    - the chosen test will partition the examples into disjoint partitions
+    - the algorithm will then recursively call itself on each partition until
+        - a partition only has data from one class (pure node) OR
+        - it runs out of attributes
+- what attribute should we choose to test first?
+    - The one that splits the test the most
+    - entropy!
+    - ```IG(X)``` = reduction in entropy of the class label if the data is partitioned using X
+    - ```IG(X) = H(Y) - H(Y|X)``
+- GainRatio
+    - normalize IG with entropy of the attribute's distribution (computed from training data)
+    - ```GR(X) = [IG(X)] / [H(X)]```
+- Continuous Attributes
+    - Consider boolean tests for attribute pairs where the splitting of one creates a border for the other?
+- Issues
+    - real data is noisy
+- Over-fitting
+    - wrong order can/will increase false positives / false negatives
+    - Early Stopping
+        - stopping the tree growth before we cross into over fitting (```IG(X)=0 for all X```)
+        - easy to implement, not very effective
+        - in some branches, you may be cutting off tot early or too late
+    - greedy post-pruning
+        - hold aside some training examples at start (validation set)
+        - grow tree as usual on remainder
+        - run a <i>greedy pruning</i> algorithm
+        - for each node, construct a tree without that node
+            - convert node to leaf by predicting majority class
+            - delete subtree below
+        - evaluate this tree on the <i>validation set</i>
+        - find the node that improves performance the most over the un-pruned tree and remove it
+        - repeat steps above until no node removal improves performance
+        - if the data is bad you're kinda screwed
+            - can use other algorithms to analyze the data
+        - computational intensive
+    - <b>decision trees are bad with smooth boundaries</b>
+- Pros and Cons of Decision Trees
+    pros | cons  
+    :- | :-  
+    doesn't require metric space representation | attributes with a lot of values (including continuous attributes)
+    produces human-comprehensible concepts | attributes with complex interactions
+    can produce concepts with range of complexity | partitioning strategy means easier to over-fit as depth increases
+    easily extendable to various other scenarios |  
+### evaluation methodology and metrics
+- ideally lots of data to train on
+- n-fold cross validation
+    - training sets need to be as large as possible
+    - for good estimates of future performance, test sets must be independent of the training set
+    - partition data into folds
+        - train on all but one fold, test on the remaining fold
+- stratified cross validation
+    - proportion of class labels will be equivalent between partitions and in relation to the data as a whole
+    - generally more stable estimates and generally used
