@@ -1,21 +1,21 @@
-# Machine Learning
+# <b>Machine Learning</b>
 
-## Table of Contents
+## <b>Table of Contents</b>
 Item | Link
 :-: | :-:
 Introduction | [Link](#Introduction)
 Review of Prob and Stats | [link](#Review-of-Probability-and-Statists)
 Machine Learning Intro | [link](#Machine-Learning-Intro)
 Decision Tree Classifiers | [link](#Decision-Tree-Classifiers)
+Optimization Review | [link](#Optimization-Review)
 
-### Terms and Definitions
+### <b>Terms and Definitions</b>
 Term | Definition
 :- | :-
 E | Examples
 P | Performance Measure
 
-
-### Introduction
+### <b>Introduction</b>
 - class logistics
     - full name in zoom participants tab please
     - no camera needed
@@ -74,7 +74,7 @@ P | Performance Measure
     - everything is a quarter
         - written, programming, project, and exam
 
-### Review of Probability and Statists
+### <b>Review of Probability and Statists</b>
 - Probability Theory
     - "degrees of belief"
     - **Random Variable** (R.V.)
@@ -113,7 +113,7 @@ P | Performance Measure
 - Variance
     - the variance of a RV is <code>V(X) = E([X-E(X)]<sup>2</sup> = &Sigma;<sub>x</sub>(x-E(X))<sup>2</sup>p<sub>x</sub>(x)</code>
 
-### Machine Learning Intro
+### <b>Machine Learning Intro</b>
 - "Machine"
     - autonomous system
     - no (or limited) human intervention
@@ -168,7 +168,7 @@ P | Performance Measure
 - feature space
     - can think of examples embedded in an *n* dimensional vector space
 
-### Decision Tree Classifiers
+### <b>Decision Tree Classifiers</b>
 - Mitchel's Ch 3
 - 1980's
 - very popular
@@ -223,7 +223,8 @@ P | Performance Measure
     produces human-comprehensible concepts | attributes with complex interactions
     can produce concepts with range of complexity | partitioning strategy means easier to over-fit as depth increases
     easily extendable to various other scenarios |  
-### evaluation methodology and metrics
+
+### <b>evaluation methodology and metrics</b>
 - ideally lots of data to train on
 - n-fold cross validation
     - training sets need to be as large as possible
@@ -233,3 +234,117 @@ P | Performance Measure
 - stratified cross validation
     - proportion of class labels will be equivalent between partitions and in relation to the data as a whole
     - generally more stable estimates and generally used
+- Contingency Table
+    . | Positive | Negative
+    :-: | :-: | :-:
+    Positive | True Positive (TP) | False Positive (FP) (Type 1 err)
+    Negative | False Negatives (FN) (Type 2 err) | True Negatives (TN)
+    - ```Accuracy = (TP + TN) / (TP + FP + FN + TN)```
+    - does not account for
+        - skewed class distributions
+        - differential misclassification costs
+        - confidence estimates from learning algorithms
+- Weighted/Balanced Accuracy
+    - Corrects for skewed class distributions
+    - GET_EQU
+- better metrics ignore true negatives, focus on the other three
+- precision
+    - ```TP / (TP + FP)```
+- recall / TP rate / sensitivity
+    - ```TP / (TP + FN) = TP / Allpos```
+- specificity / TN rate
+    - ```TN / (TN + FP) = TN / Allneg```
+- as such: ```WAcc = 0.5(Sensitivity + Specificity)```
+- F<sub>1</sub> score
+    - <code>F<sub>1</sub> = 2 / [(1 / Precision) + (1 / Recall)]</code>
+    - "harmonic mean"???
+    - specific index of F<sub>&beta;</sub> metric
+- beyond point estimates
+    - everything above is a "point estimate"
+    - can compute variance from sample
+    - important to show stability of solutions
+- learning curves
+    - Metric (eg: accuracy) vs Training Sample Size (y vs x respectively)
+    - shows "how many samples does this algorithm need to be a viable solution"
+- metrics with confidence measures
+    - many algos also provide confidence values
+    - in this case, can plot Precision-Recall (PR) and Receiver Operating Characteristic (ROC)
+    - ROC will misrepresent when the proportion of examples is extremely skewed
+
+<i>(9/17/2020)</i>
+
+### <b>optimization review</b>
+- (CSDS 447, MATH 427, or MATH 433)
+- Find the extreme values of a function (aka "objective function")
+    - sometimes interested in the arguments themselves, not the value (argmax, argmin)
+- types of optimization problems
+    - discrete vs continuous
+    - unconstrained vs constrained
+    - this class will focus continuous, constrained & unconstrained
+- we will only be thinking about minimization function, but they work the same for maximization optimization
+
+#### <b>unconstrained optimization</b>
+- <u><b>bold x means a set of variables, not single</u></b>
+- Jacobian
+    - J = df / dxi = 0
+    - <code>J = (&delta;f / &delta;x<sub>i</sub>) = 0</code>
+- Hessian
+    - <code>H = (&delta;<sup>2</sup>f / &delta;<sub><b>x</b><sub>i</sub></sub>&delta;<sub><b>x</b><sub>j</sub></sub>) > 0</code>
+- both of these equations constitute a system of non-linear equations (which must be set equal to zero)
+- gradient ascent/descent
+    - <code><b>x</b><sub>new</sub> = <b>x</b><sub>old</sub> - &alpha;&nabla;f<sub><b>x</b></sub>(<b>x</b>)</code>
+    - <code>&alpha;</codE> is the step size
+    - function gradient evaluated at <code>x<sub>old</sub></code>
+    - slow convergence near the end, fast away from it
+- Newton-Raphson Method
+    - GET_EQU_SLIDE_10
+    - first equ is a tailor series
+    - fast convergence near solution, slow away from it
+- quasi-newton methods
+    - NR is expensive
+        - <code>O(n<sup>2</sup>)</code>
+    - quasi-newton methods exist to approximate NR
+- characterizing solutions
+    - global min/max
+    - local min/max
+    - plateau
+- note: no algorithm guarantees finding global optimum of an arbitrary function
+    - however, there is a class of functions (convex?) where we can guarantee discovery of optimization
+- convex sets
+    - a set <b>C</b> is convex if for any <b>x</b><sub>1</sub>, <b>x</b><sub>2</sub> in <b>C</b>, <code>&lambda;<b>x</b><sub>1</sub> + (1 - &lambda;)<b>x</b><sub>2</sub></code> is also in <b>C</b>
+- convex function
+    - epi graph
+        - for all points <code>{x, y | y >= f(x)}</code>
+        - graph is convex if its epigraph is a convex set
+    - for a point
+        - <code>(&lambda;<b>x</b><sub>1</sub> + (1 - &lambda;)<b>x</b><sub>2</sub>, &lambda;f(<b>x</b><sub>1</sub>) + (1 - &lambda;)f(<b>x</b><sub>2</sub>))</code>
+    - Jensen's inequality
+        - <code>[&lambda;<b>x</b><sub>1</sub> + (1 - &lambda;)<b>x</b><sub>2</sub>] <= [&lambda;f(<b>x</b><sub>1</sub>) + (1 - &lambda;)f(<b>x</b><sub>2</sub>)]</code>
+    - for a convex function, every local optimum is also a global optimum
+
+#### <b>constrained optimization</b>
+- linear programming
+    - a special case of constrained optimization where the objective and the constraints are all linear functions
+    - can cast from linear to matrix notation
+        - <i>f in chat for my 0 lin-alg classes i've taken</i>
+    - creates geometry bound by planes
+        - its a convex set!
+- simplex algorithm
+    - walk around the polyhedron
+    - from any feasible vertex, walk along the edges of the polyhedron following the vertices
+    - once you find the local minimum, we know that it's the global minium b/c it's a convex set
+    - simple and easy to implement
+    - exponentially many vertices for <i>n</i> constraints, worst case runtime is exponential
+        - on average distributions have been shown to by polynomial
+    - other algorithms exist, such as "interior points methods", which have polynomial bounds*
+        - *more generalized than Turing computation b/c turing's doesn't deal with real number
+- duality in linear programming
+    - for any LP, we can derive a "dual" LP
+    - GET_EQU_22
+        - u = unknown
+        - \# of u's = to \# of constraints
+- primal and dual LPs
+    - the primal has a solution iff the dual has one
+- Karush-Kuhn-Tucker conditions
+    - @ optimal solution, <b>x</b> and <b>u</b> are feasible and the objective function <code>c<sup>T</sup><b>x</b></code> and <code>b<sup>T</sup><b>u</b></code> are equal
+        - other stuff to come later in the class
