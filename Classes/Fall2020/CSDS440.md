@@ -8,6 +8,8 @@ Review of Prob and Stats | [link](#Review-of-Probability-and-Statists)
 Machine Learning Intro | [link](#Machine-Learning-Intro)
 Decision Tree Classifiers | [link](#Decision-Tree-Classifiers)
 Optimization Review | [link](#Optimization-Review)
+Artificial Neural Networks | [link](#Artificial-Neural-Networks)
+Neural Networks and Deep Learning | [link](#Neural-Networks-and-Deep-Learning)
 
 ### <b>Terms and Definitions</b>
 Term | Definition
@@ -15,7 +17,7 @@ Term | Definition
 E | Examples
 P | Performance Measure
 
-### <b>Introduction</b>
+### Introduction
 - class logistics
     - full name in zoom participants tab please
     - no camera needed
@@ -74,7 +76,7 @@ P | Performance Measure
     - everything is a quarter
         - written, programming, project, and exam
 
-### <b>Review of Probability and Statists</b>
+### Review of Probability and Statists
 - Probability Theory
     - "degrees of belief"
     - **Random Variable** (R.V.)
@@ -113,7 +115,7 @@ P | Performance Measure
 - Variance
     - the variance of a RV is <code>V(X) = E([X-E(X)]<sup>2</sup> = &Sigma;<sub>x</sub>(x-E(X))<sup>2</sup>p<sub>x</sub>(x)</code>
 
-### <b>Machine Learning Intro</b>
+### Machine Learning Intro
 - "Machine"
     - autonomous system
     - no (or limited) human intervention
@@ -168,7 +170,7 @@ P | Performance Measure
 - feature space
     - can think of examples embedded in an *n* dimensional vector space
 
-### <b>Decision Tree Classifiers</b>
+### Decision Tree Classifiers
 - Mitchel's Ch 3
 - 1980's
 - very popular
@@ -224,7 +226,7 @@ P | Performance Measure
     can produce concepts with range of complexity | partitioning strategy means easier to over-fit as depth increases
     easily extendable to various other scenarios |  
 
-### <b>evaluation methodology and metrics</b>
+### evaluation methodology and metrics
 - ideally lots of data to train on
 - n-fold cross validation
     - training sets need to be as large as possible
@@ -273,7 +275,7 @@ P | Performance Measure
 
 <i>(9/17/2020)</i>
 
-### <b>optimization review</b>
+### optimization review
 - (CSDS 447, MATH 427, or MATH 433)
 - Find the extreme values of a function (aka "objective function")
     - sometimes interested in the arguments themselves, not the value (argmax, argmin)
@@ -283,7 +285,7 @@ P | Performance Measure
     - this class will focus continuous, constrained & unconstrained
 - we will only be thinking about minimization function, but they work the same for maximization optimization
 
-#### <b>unconstrained optimization</b>
+#### unconstrained optimization
 - <u><b>bold x means a set of variables, not single</u></b>
 - Jacobian
     - J = df / dxi = 0
@@ -322,7 +324,7 @@ P | Performance Measure
         - <code>[&lambda;<b>x</b><sub>1</sub> + (1 - &lambda;)<b>x</b><sub>2</sub>] <= [&lambda;f(<b>x</b><sub>1</sub>) + (1 - &lambda;)f(<b>x</b><sub>2</sub>)]</code>
     - for a convex function, every local optimum is also a global optimum
 
-#### <b>constrained optimization</b>
+#### constrained optimization
 - linear programming
     - a special case of constrained optimization where the objective and the constraints are all linear functions
     - can cast from linear to matrix notation
@@ -348,3 +350,122 @@ P | Performance Measure
 - Karush-Kuhn-Tucker conditions
     - @ optimal solution, <b>x</b> and <b>u</b> are feasible and the objective function <code>c<sup>T</sup><b>x</b></code> and <code>b<sup>T</sup><b>u</b></code> are equal
         - other stuff to come later in the class
+
+<i>(9/22/2020)</i>
+
+### Artificial Neural Networks
+- Perceptron / Linear Threshold Unit
+    - Rosenblatt (1957)
+- Loss function
+    -  difference betwen our current estimates of y (y hat) and the tru y (which is known) over all training, with respect to w & &sigma;
+    - want to minimize this function
+
+<i>(9/29/2020)</i>
+
+- Prof. Ray forgot his notes in his office (couldn't get em b/c of the presidential debate), skipping ahead then doing the actual lecture later
+- looking at algo's that explicitly estimate probabilities of class membership
+    - ```P(X, Y)```
+    - ```P(Y | X)```
+    - ```P(X | Y)``` ("class conditional distribution")
+- Bayesian Decision Theory
+    - optimal thing to do is to choose hypothesis to minimize <i>expected risk</i>
+    - GET_EQU_SLIDE_5
+- Why?
+    - naturally produce "confidence estimates"
+    - naturally incorporate "prior knowledge"
+    - can also give tools to analyze some algo'sd
+- probabilistic classification
+    - p(x, y)
+- discriminative classification
+    - p(y|x)
+- generative approaches
+    - remember product rule f/ probabilities
+        - <code>p(x,y) = p(x|y)p(y)</code>
+    - choose a class, then choose  an instance, then "generate" the observed data.
+    - handles missing values
+    - "more work" than necessary
+- discriminative approaches
+    - only interested in <code>p(y|x)</code>
+    - no way to recover / "generate" the data
+    - robust to modeling errors
+    - usually more accurate than generative, but some evidence suggests that convergence is slower
+- Naive Bayes
+    - simplest generative classifier for discrete data
+    - very large table if we were to notate the PDF
+    - Naive Bayes assumption
+        - features are independent from class labels
+        - not normally the actually case, but the results still work pretty good
+    - GET_EQU_SLIDE_11
+    - linear runtime with optimization instead of exponential (<code>2<sup>n+1</sup></code> => <code>2n+1</code>)
+- posterior probability
+    - GET_EQU_SLIDE_20
+    - probability of a hypothesis given data
+- MAP Hypothesis
+    - GET_EQU_SLIDE_21
+- maximum likelihood (ML)
+    - <code>h<sub>ML</sub>=argmax<sub>(h &epsilon; H)</sub>Pr(D|h)</code>
+- <i>remember to smooth your estimates so you don't get cascading 0's</i>
+
+<i>10/1/2020</i>
+
+### Neural Networks and Deep Learning
+- be aware of vanishing gradients problem f/ back propagation
+- Network as a Computation Graph
+    - each layer can be viewed as a matrix/vector operation on the previous layer
+    - GET_EQU_SLIDE_6
+- interpretation of hidden units
+    - key problem in ML: how to auto design representations that enable effective learning
+- deep learning
+    - try to learn a good representations at different levels of abstraction
+    - generating good features
+        - allow long computational paths
+        - aggregate information across many different parts of the input
+    - problem
+        - as the netwoek grows, the number of parameters scale quadratically with layer size
+        - ex: 256x256 image
+            - equal number of hidden units => <code>(256)<sup>4</sup> = 4e9</code>
+        - can structure to limit
+            - locality
+            - invariance
+    - locality
+        - let each hidden unit only look at a small part of the input
+    - invariance
+        - let the weights connecting a local region to a hidden unit be the same for every hidden unit
+- convolutional neural networks
+    - Introduce a <b>kernel</b> <i>k</i> that is a set of weights replicated across multiple local regions
+        - NOTE: kernel is an overloaded term in AI, watch out
+    - the operation of applying the kernel to the input is called convolution
+- Tensor
+    - each convolutional kernel can be considered one "feature detector"
+    - Typically, will have many kernels
+    - to maintain locality and invariance, instead of concatenating these kernels we stack them along a new dimension
+    - if the input has 2+ dimensions, then this results in a multidimensional matrix at each layer
+        - aka "tensors"
+        - <i>tensor was appropriated from Math by us AI folk</i>
+- pooling
+    - a pooling layer aggregates information from an adjacent layer
+    - avg pooling: <code>k=(1/l, 1/l, ... 1/l)</code>
+    - max pooling: computes max val of <i>l</i> something
+- residual networks
+    - key problem in ANN's is vanishing gradients
+        - b/c each layer learns a completely new representation from the previous layer
+        - errors can the cascade forward in the network and poison the response
+    - instead, each layer can perturb the learned representation of the previous layer
+        - allows building much deeper structure robustly
+        - prevents catastrophic failure do to a single error
+    - GET_EQU_SLIDE 21
+
+<i>10/6/2020</i>
+
+- over fitting in ANN's
+    - idea: weight decay
+        - GET_EQ_SLIDE_5
+    - careful, if we force the weights to too small the sigmoid will act as a linear function because it will be too bound
+        - GET_FIG_SLIDE_6
+    - dropout
+        - each backprop step, randomly sample a set of hidden units to <i>leave out of the update</i>
+        - unknown why exactly this works
+
+    - <i><b>missed a bunch of stuff cause i was in the restroom, fill it in ya fool</b></i>
+
+    - 
